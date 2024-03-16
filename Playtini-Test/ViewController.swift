@@ -9,20 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private lazy var circleView: UIView = {
-        let value = UIView()
-        value.translatesAutoresizingMaskIntoConstraints = false
-        value.backgroundColor = .red
-        value.layer.cornerRadius = 50
+    private lazy var circleView: CircleView = {
+        let value = CircleView(color: .red, cornerRadius: 50)
         return value
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         view.addSubview(circleView)
-
         setConstraintsForShape()
     }
 
