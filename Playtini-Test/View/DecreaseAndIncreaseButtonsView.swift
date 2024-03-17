@@ -11,20 +11,18 @@ class DecreaseAndIncreaseButtonsView: UIView {
 
     private lazy var decreaseButton: UIButton = {
         let value = buldButton(
-            text: "-",
+            text: .minus,
             radius: 8)
 
         return value
     }()
-
     private lazy var increaseButton: UIButton = {
         let value = buldButton(
-            text: "+",
+            text: .plus,
             radius: 8)
 
         return value
     }()
-
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             decreaseButton,
@@ -35,7 +33,6 @@ class DecreaseAndIncreaseButtonsView: UIView {
         stackView.spacing = 48
         return stackView
     }()
-
 
     init() {
         super.init(frame: .zero)
@@ -68,9 +65,9 @@ class DecreaseAndIncreaseButtonsView: UIView {
         ])
     }
 
-    private func buldButton(text: String, radius: CGFloat) -> UIButton {
+    private func buldButton(text: Mark, radius: CGFloat) -> UIButton {
         let button = UIButton()
-        button.setTitle(text, for: .normal)
+        button.setTitle(text.stringValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .red
         button.addCornerRadius(radius: radius)

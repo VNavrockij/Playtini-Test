@@ -16,6 +16,7 @@
 		FA5340AB2BA6035D00D69857 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340AA2BA6035C00D69857 /* CircleView.swift */; };
 		FA5340AD2BA60C3E00D69857 /* DecreaseAndIncreaseButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340AC2BA60C3E00D69857 /* DecreaseAndIncreaseButtonsView.swift */; };
 		FA5340B02BA60D7900D69857 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340AF2BA60D7900D69857 /* UIView+Extension.swift */; };
+		FAD13FFC2BA7663E004D1DFE /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD13FFB2BA7663E004D1DFE /* Mark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FA5340AA2BA6035C00D69857 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		FA5340AC2BA60C3E00D69857 /* DecreaseAndIncreaseButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecreaseAndIncreaseButtonsView.swift; sourceTree = "<group>"; };
 		FA5340AF2BA60D7900D69857 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		FAD13FFB2BA7663E004D1DFE /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		FA5340942BA5D6AE00D69857 /* Playtini-Test */ = {
 			isa = PBXGroup;
 			children = (
+				FAD13FFA2BA76626004D1DFE /* Model */,
 				FA5340AE2BA60D6600D69857 /* Extensions */,
 				FA5340A92BA6034D00D69857 /* View */,
 				FA5340952BA5D6AE00D69857 /* AppDelegate.swift */,
@@ -90,6 +93,14 @@
 				FA5340AF2BA60D7900D69857 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FAD13FFA2BA76626004D1DFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAD13FFB2BA7663E004D1DFE /* Mark.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +177,7 @@
 				FA5340B02BA60D7900D69857 /* UIView+Extension.swift in Sources */,
 				FA5340AB2BA6035D00D69857 /* CircleView.swift in Sources */,
 				FA5340AD2BA60C3E00D69857 /* DecreaseAndIncreaseButtonsView.swift in Sources */,
+				FAD13FFC2BA7663E004D1DFE /* Mark.swift in Sources */,
 				FA53409A2BA5D6AE00D69857 /* ViewController.swift in Sources */,
 				FA5340962BA5D6AE00D69857 /* AppDelegate.swift in Sources */,
 				FA5340982BA5D6AE00D69857 /* SceneDelegate.swift in Sources */,
