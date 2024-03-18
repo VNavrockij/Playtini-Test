@@ -10,7 +10,8 @@ import UIKit
 class ViewController: UIViewController {
 
     private lazy var circleView: CircleView = {
-        let value = CircleView(color: .red, cornerRadius: 50)
+        let colors: [UIColor] = [.red, .blue]
+        let value = CircleView(colors: colors, cornerRadius: 50)
         return value
     }()
 
@@ -18,14 +19,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setUI()
+    }
+
+    private func setUI() {
         view.backgroundColor = .white
         view.addSubview(circleView)
         view.addSubview(buttons)
         setConstraintsForCircle()
         setConstraintsForButtons()
+        circleView.animate()
     }
 
-    func setConstraintsForCircle() {
+    private func setConstraintsForCircle() {
         NSLayoutConstraint.activate([
             circleView.widthAnchor.constraint(equalToConstant: 100),
             circleView.heightAnchor.constraint(equalToConstant: 100),
@@ -34,7 +41,7 @@ class ViewController: UIViewController {
         ])
     }
 
-    func setConstraintsForButtons() {
+    private func setConstraintsForButtons() {
         buttons.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttons.bottomAnchor.constraint(equalTo: view.bottomAnchor),

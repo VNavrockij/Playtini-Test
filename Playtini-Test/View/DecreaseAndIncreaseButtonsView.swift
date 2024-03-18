@@ -12,14 +12,16 @@ class DecreaseAndIncreaseButtonsView: UIView {
     private lazy var decreaseButton: UIButton = {
         let value = buldButton(
             text: .minus,
-            radius: 8)
+            radius: 8,
+            color: .blue)
 
         return value
     }()
     private lazy var increaseButton: UIButton = {
         let value = buldButton(
             text: .plus,
-            radius: 8)
+            radius: 8,
+            color: .red)
 
         return value
     }()
@@ -65,11 +67,11 @@ class DecreaseAndIncreaseButtonsView: UIView {
         ])
     }
 
-    private func buldButton(text: Mark, radius: CGFloat) -> UIButton {
+    private func buldButton(text: Mark, radius: CGFloat, color: UIColor) -> UIButton {
         let button = UIButton()
         button.setTitle(text.stringValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .red
+        button.backgroundColor = color
         button.addCornerRadius(radius: radius)
         return button
     }
