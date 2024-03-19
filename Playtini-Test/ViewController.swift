@@ -8,29 +8,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var circleRadius: CGFloat = 100 {
-        didSet {
-        }
-        willSet {
+    var circleRadius: CGFloat = 100
 
-        }
-    }
+    private var isAnimating = false
 
     private var circleWidthConstraint: NSLayoutConstraint?
     private var circleHeightConstraint: NSLayoutConstraint?
 
     private lazy var circleView: CircleView = {
-        let colors: [UIColor] = [.red, .blue]
+        let colors: [UIColor] = [UIColor(hexString: "a4c3b2"), UIColor(hexString: "eaf4f4")]
         let value = CircleView(colors: colors, cornerRadius: 50)
         return value
     }()
 
     private lazy var decreaseButton: UIButton = {
-        ButtonFactory.buldButton(text: .minus, radius: 8, color: .blue)
+        ButtonFactory.buldButton(text: .minus, radius: 8, color: UIColor(hexString: "6b9080"))
     }()
 
     private lazy var increaseButton: UIButton = {
-        ButtonFactory.buldButton(text: .plus, radius: 8, color: .red)
+        ButtonFactory.buldButton(text: .plus, radius: 8, color: UIColor(hexString: "a4c3b2"))
     }()
 
     private lazy var stackView: UIStackView = {
@@ -51,7 +47,7 @@ class ViewController: UIViewController {
     }
 
     private func setUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hexString: "f6fff8")
         view.addSubview(circleView)
         view.addSubview(stackView)
 
@@ -74,18 +70,25 @@ class ViewController: UIViewController {
             updateCircle()
         }
     }
-    
+
     @objc private func increaseButtonPressed() {
-        if circleRadius < 200 {
+        if circleRadius < 250 {
             circleRadius += 10
             updateCircle()
         }
     }
 
     private func updateCircle() {
-        circleWidthConstraint?.constant = circleRadius
-        circleHeightConstraint?.constant = circleRadius
-        view.layoutIfNeeded()
+        guard !isAnimating else { return }
+            isAnimating = true
+
+        UIView.animate(withDuration: 0.1, animations: {
+                self.circleWidthConstraint?.constant = self.circleRadius
+                self.circleHeightConstraint?.constant = self.circleRadius
+                self.view.layoutIfNeeded()
+            }) { _ in
+                self.isAnimating = false
+            }
     }
 
     private func setConstraintsForButtons() {
@@ -104,6 +107,12 @@ class ViewController: UIViewController {
     private func setConstraintsForCircle() {
         circleWidthConstraint = circleView.widthAnchor.constraint(equalToConstant: circleRadius)
         circleHeightConstraint = circleView.heightAnchor.constraint(equalToConstant: circleRadius)
+
+        guard circleWidthConstraint != nil,
+        circleHeightConstraint != nil else {
+            print("Not set width and height for circle")
+            return
+        }
 
         NSLayoutConstraint.activate([
             circleWidthConstraint!,

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA10F7552BA9F60300B22482 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10F7542BA9F60300B22482 /* UIButton+Extension.swift */; };
+		FA10F7572BAA030400B22482 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10F7562BAA030400B22482 /* UIColor+Extension.swift */; };
 		FA5340962BA5D6AE00D69857 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340952BA5D6AE00D69857 /* AppDelegate.swift */; };
 		FA5340982BA5D6AE00D69857 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340972BA5D6AE00D69857 /* SceneDelegate.swift */; };
 		FA53409A2BA5D6AE00D69857 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5340992BA5D6AE00D69857 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		FA10F7542BA9F60300B22482 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		FA10F7562BAA030400B22482 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		FA5340922BA5D6AE00D69857 /* Playtini-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Playtini-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5340952BA5D6AE00D69857 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5340972BA5D6AE00D69857 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				FA5340AF2BA60D7900D69857 /* UIView+Extension.swift */,
 				FA10F7542BA9F60300B22482 /* UIButton+Extension.swift */,
+				FA10F7562BAA030400B22482 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				FA10F7552BA9F60300B22482 /* UIButton+Extension.swift in Sources */,
 				FA5340962BA5D6AE00D69857 /* AppDelegate.swift in Sources */,
 				FA5340982BA5D6AE00D69857 /* SceneDelegate.swift in Sources */,
+				FA10F7572BAA030400B22482 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
