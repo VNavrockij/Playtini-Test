@@ -49,7 +49,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         setUI()
-        animateBlocks()
     }
 
     private func setUI() {
@@ -66,6 +65,7 @@ class ViewController: UIViewController {
         setTargetsForButtons()
 
         circleView.animate()
+        animateBlocks()
 
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             print("timer")
@@ -106,13 +106,33 @@ class ViewController: UIViewController {
     }
 
     private func animateBlocks() {
-        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseInOut) {
+        animateTopBlock()
+        animateBottomBlock()
+    }
+
+    private func animateTopBlock() {
+        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseInOut, animations: {
             self.topBlock.frame.origin.x = self.topBlockFinalPosition
+        }, completion: { _ in
+            self.resetTopBlock()
+            self.animateTopBlock()
+        })
+    }
+        private func animateBottomBlock() {
+            UIView.animate(withDuration: 2.0, delay: 1.0, options: .curveEaseInOut, animations: {
+                self.bottomBlock.frame.origin.x = self.bottomBlockFinalPosition
+            }, completion: { _ in
+                self.resetBottomBlock()
+                self.animateBottomBlock()
+            })
         }
 
-        UIView.animate(withDuration: 2.0, delay: 1.0, options: .curveEaseInOut) {
-            self.bottomBlock.frame.origin.x = self.bottomBlockFinalPosition
-        }
+    private func resetTopBlock() {
+        topBlock.frame.origin.x = topBlockInitialPosition
+    }
+
+    private func resetBottomBlock() {
+        bottomBlock.frame.origin.x = bottomBlockInitialPosition
     }
 
     private func setConstraintsForButtons() {
@@ -156,7 +176,7 @@ class ViewController: UIViewController {
         topBlock.frame = CGRect(x: topBlockInitialPosition, y: 300, width: 200, height: 10)
         topBlock.backgroundColor = UIColor(hexString: "6b9080")
 
-        bottomBlock.frame = CGRect(x: bottomBlockInitialPosition, y: view.frame.maxY - 250, width: 200, height: 10)
+        bottomBlock.frame = CGRect(x: bottomBlockInitialPosition, y: view.frame.maxY - 310, width: 200, height: 10)
         bottomBlock.backgroundColor = UIColor(hexString: "a4c3b2")
     }
 }
