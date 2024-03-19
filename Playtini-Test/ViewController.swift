@@ -15,20 +15,25 @@ class ViewController: UIViewController {
     private var circleWidthConstraint: NSLayoutConstraint?
     private var circleHeightConstraint: NSLayoutConstraint?
 
+    let topBlock = UIView()
+    let bottomBlock = UIView()
+
+    private var topBlockInitialPosition: CGFloat = 0.0
+    private var topBlockFinalPosition: CGFloat = 0.0
+    private var bottomBlockInitialPosition: CGFloat = 0.0
+    private var bottomBlockFinalPosition: CGFloat = 0.0
+
     private lazy var circleView: CircleView = {
         let colors: [UIColor] = [UIColor(hexString: "a4c3b2"), UIColor(hexString: "eaf4f4")]
         let value = CircleView(colors: colors, cornerRadius: 50)
         return value
     }()
-
     private lazy var decreaseButton: UIButton = {
         ButtonFactory.buldButton(text: .minus, radius: 8, color: UIColor(hexString: "6b9080"))
     }()
-
     private lazy var increaseButton: UIButton = {
         ButtonFactory.buldButton(text: .plus, radius: 8, color: UIColor(hexString: "a4c3b2"))
     }()
-
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             decreaseButton,
@@ -44,19 +49,28 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         setUI()
+        animateBlocks()
     }
 
     private func setUI() {
         view.backgroundColor = UIColor(hexString: "f6fff8")
         view.addSubview(circleView)
         view.addSubview(stackView)
+        view.addSubview(topBlock)
+        view.addSubview(bottomBlock)
 
         setConstraintsForButtons()
         setConstraintsForCircle()
+        setBlocks()
 
         setTargetsForButtons()
 
         circleView.animate()
+
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            print("timer")
+//                    self.checkCollision()
+                }
     }
 
     private func setTargetsForButtons() {
@@ -91,6 +105,16 @@ class ViewController: UIViewController {
             }
     }
 
+    private func animateBlocks() {
+        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseInOut) {
+            self.topBlock.frame.origin.x = self.topBlockFinalPosition
+        }
+
+        UIView.animate(withDuration: 2.0, delay: 1.0, options: .curveEaseInOut) {
+            self.bottomBlock.frame.origin.x = self.bottomBlockFinalPosition
+        }
+    }
+
     private func setConstraintsForButtons() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -120,6 +144,20 @@ class ViewController: UIViewController {
             circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             circleView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+
+    private func setBlocks() {
+        topBlockInitialPosition = view.frame.maxX
+        bottomBlockInitialPosition = view.frame.maxX
+
+        topBlockFinalPosition = view.frame.minX - 200
+        bottomBlockFinalPosition = view.frame.minX - 250
+
+        topBlock.frame = CGRect(x: topBlockInitialPosition, y: 300, width: 200, height: 10)
+        topBlock.backgroundColor = UIColor(hexString: "6b9080")
+
+        bottomBlock.frame = CGRect(x: bottomBlockInitialPosition, y: view.frame.maxY - 250, width: 200, height: 10)
+        bottomBlock.backgroundColor = UIColor(hexString: "a4c3b2")
     }
 }
 
