@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     var circleRadius: CGFloat = 100
     var countOfCollision = 0 {
         didSet {
-            if countOfCollision >= 5 {
+            if countOfCollision == 5 {
                 presentAlert()
             }
         }
@@ -75,7 +75,6 @@ class ViewController: UIViewController {
         animateBlocks()
 
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            //            print("timer")
             self.checkCollision()
         }
     }
@@ -100,6 +99,12 @@ class ViewController: UIViewController {
 
     private func presentAlert() {
     // TODO: alert - Restart - vibration
+        let alert = UIAlertController(title: "Five contacts", message: "Restart", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+            self.resetGame()
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 
     private func setTargetsForButtons() {
@@ -162,6 +167,12 @@ class ViewController: UIViewController {
 
     private func resetBottomBlock() {
         bottomBlock.frame.origin.x = bottomBlockInitialPosition
+    }
+
+    private func resetGame() {
+            countOfCollision = 0
+            circleRadius = 100
+            updateCircle()
     }
 
     private func setConstraintsForButtons() {
