@@ -86,11 +86,15 @@ class ViewController: UIViewController {
            let topBlockRect = topBlock.layer.presentation()?.frame,
            let bottomBlockRect = bottomBlock.layer.presentation()?.frame {
             if circleRect.intersects(topBlockRect)  {
+                feedbackGenerator = UINotificationFeedbackGenerator()
+                feedbackGenerator?.notificationOccurred(.warning)
                 countOfCollision += 1
                 resetTopBlock()
                 print("Collision detected! Count: \(countOfCollision)")
                 return
             } else if circleRect.intersects(bottomBlockRect) {
+                feedbackGenerator = UINotificationFeedbackGenerator()
+                feedbackGenerator?.notificationOccurred(.warning)
                 countOfCollision += 1
                 resetBottomBlock()
                 print("Collision detected! Count: \(countOfCollision)")
@@ -100,9 +104,6 @@ class ViewController: UIViewController {
     }
 
     private func presentAlert() {
-        feedbackGenerator = UINotificationFeedbackGenerator()
-        feedbackGenerator?.notificationOccurred(.warning)
-
         let alert = UIAlertController(title: "Five contacts", message: "Restart", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
             self.resetGame()
