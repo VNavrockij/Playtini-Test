@@ -116,7 +116,10 @@ class ViewController: UIViewController {
         decreaseButton.addTarget(self, action: #selector(decreseButtonPressed), for: .touchUpInside)
         increaseButton.addTarget(self, action: #selector(increaseButtonPressed), for: .touchUpInside)
     }
+}
 
+// MARK: - Animation
+extension ViewController {
     @objc private func decreseButtonPressed() {
         if circleRadius > 50 {
             circleRadius -= 10
@@ -179,7 +182,10 @@ class ViewController: UIViewController {
             circleRadius = 100
             updateCircle()
     }
+}
 
+// MARK: - Constraints
+extension ViewController {
     private func setConstraintsForButtons() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
