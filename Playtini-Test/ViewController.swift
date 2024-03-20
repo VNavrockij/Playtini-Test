@@ -9,6 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
     var circleRadius: CGFloat = 100
+    var countOfCollision = 0 {
+        didSet {
+            if countOfCollision >= 5 {
+                presentAlert()
+            }
+        }
+    }
 
     private var isAnimating = false
 
@@ -68,9 +75,31 @@ class ViewController: UIViewController {
         animateBlocks()
 
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            print("timer")
-//                    self.checkCollision()
-                }
+            //            print("timer")
+            self.checkCollision()
+        }
+    }
+
+    private func checkCollision() {
+        if let circleRect = circleView.layer.presentation()?.frame,
+           let topBlockRect = topBlock.layer.presentation()?.frame,
+           let bottomBlockRect = bottomBlock.layer.presentation()?.frame {
+            if circleRect.intersects(topBlockRect)  {
+                countOfCollision += 1
+                resetTopBlock()
+                print("Collision detected! Count: \(countOfCollision)")
+                return
+            } else if circleRect.intersects(bottomBlockRect) {
+                countOfCollision += 1
+                resetBottomBlock()
+                print("Collision detected! Count: \(countOfCollision)")
+                return
+            }
+        }
+    }
+
+    private func presentAlert() {
+    // TODO: alert - Restart - vibration
     }
 
     private func setTargetsForButtons() {
@@ -94,15 +123,15 @@ class ViewController: UIViewController {
 
     private func updateCircle() {
         guard !isAnimating else { return }
-            isAnimating = true
+        isAnimating = true
 
         UIView.animate(withDuration: 0.1, animations: {
-                self.circleWidthConstraint?.constant = self.circleRadius
-                self.circleHeightConstraint?.constant = self.circleRadius
-                self.view.layoutIfNeeded()
-            }) { _ in
-                self.isAnimating = false
-            }
+            self.circleWidthConstraint?.constant = self.circleRadius
+            self.circleHeightConstraint?.constant = self.circleRadius
+            self.view.layoutIfNeeded()
+        }) { _ in
+            self.isAnimating = false
+        }
     }
 
     private func animateBlocks() {
@@ -111,21 +140,21 @@ class ViewController: UIViewController {
     }
 
     private func animateTopBlock() {
-        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 2.5, delay: 0.0, options: .curveEaseInOut, animations: {
             self.topBlock.frame.origin.x = self.topBlockFinalPosition
         }, completion: { _ in
             self.resetTopBlock()
             self.animateTopBlock()
         })
     }
-        private func animateBottomBlock() {
-            UIView.animate(withDuration: 2.0, delay: 1.0, options: .curveEaseInOut, animations: {
-                self.bottomBlock.frame.origin.x = self.bottomBlockFinalPosition
-            }, completion: { _ in
-                self.resetBottomBlock()
-                self.animateBottomBlock()
-            })
-        }
+    private func animateBottomBlock() {
+        UIView.animate(withDuration: 2.0, delay: 1.5, options: .curveEaseInOut, animations: {
+            self.bottomBlock.frame.origin.x = self.bottomBlockFinalPosition
+        }, completion: { _ in
+            self.resetBottomBlock()
+            self.animateBottomBlock()
+        })
+    }
 
     private func resetTopBlock() {
         topBlock.frame.origin.x = topBlockInitialPosition
@@ -153,8 +182,8 @@ class ViewController: UIViewController {
         circleHeightConstraint = circleView.heightAnchor.constraint(equalToConstant: circleRadius)
 
         guard circleWidthConstraint != nil,
-        circleHeightConstraint != nil else {
-            print("Not set width and height for circle")
+              circleHeightConstraint != nil else {
+            NSLog("Not set width and height for circle")
             return
         }
 
@@ -180,5 +209,3 @@ class ViewController: UIViewController {
         bottomBlock.backgroundColor = UIColor(hexString: "a4c3b2")
     }
 }
-
-
