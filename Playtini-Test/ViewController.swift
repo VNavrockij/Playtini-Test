@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     private var circleWidthConstraint: NSLayoutConstraint?
     private var circleHeightConstraint: NSLayoutConstraint?
 
+    private var feedbackGenerator: UINotificationFeedbackGenerator?
+
     let topBlock = UIView()
     let bottomBlock = UIView()
 
@@ -98,7 +100,9 @@ class ViewController: UIViewController {
     }
 
     private func presentAlert() {
-    // TODO: alert - Restart - vibration
+        feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator?.notificationOccurred(.warning)
+
         let alert = UIAlertController(title: "Five contacts", message: "Restart", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
             self.resetGame()
